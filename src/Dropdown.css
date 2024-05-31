@@ -1,0 +1,22 @@
+.dropdown-container{
+    padding: .5rem 0rem; 
+    border: 1px solid #eee;
+    border-radius: 5px;
+    opacity: 0;
+    position: absolute;
+    transition: opacity .3s linear;
+}
+.dropdown-container.active{
+    opacity: 1;
+}
+.dropdown-container > ul{
+    list-style: none;
+    margin: 0; padding: 0;
+}
+.dropdown-container > ul > li {
+    cursor: pointer;
+    padding: .3rem 1rem;
+}
+.dropdown-container > ul > li:hover{
+    background-color: #eee;
+}

@@ -1,3 +1,18 @@
 .App{
     text-align: center;
 }
+ul{
+    list-style: none;
+}
+nav > ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+nav > ul > li{
+    margin-right: 2rem;
+    cursor: pointer;
+}
+nav > ul > li:hover{
+    color: orange;
+}
