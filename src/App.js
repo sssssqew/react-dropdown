@@ -9,9 +9,10 @@ const dropdownMenu = {
 }
 
 function App(){
-    const [page, setPage] = useState('')
-    const [layout, setLayout] = useState({})
-    const [target, setTarget] = useState(null)
+    const [page, setPage] = useState('') // 현재 선택한 메뉴 저장
+    const [layout, setLayout] = useState({}) // 현재 드롭다운 위치 저장
+    const [target, setTarget] = useState(null) // 현재 선택한 타겟 저장 
+    const [resize, setResize] = useState(false) // 브라우저 크기 조정중인지 판단 
 
     const menus = dropdownMenu[page] // 드롭다운 메뉴 
     const sx = {backgroundColor: 'orange', color: 'red' } // 드롭다운 스타일 설정
@@ -28,11 +29,13 @@ function App(){
     const closeDropdown = () => {
         setPage('')
         setLayout({})
+        setTarget(null)
     }
     const changePosition = () => {
         if(target){
             const {x, bottom} = target.getBoundingClientRect()
             setLayout({x, y: bottom })
+            setResize(prevResize => !prevResize)
         }
     }
     const setDropdown = (e) => {
@@ -51,11 +54,9 @@ function App(){
         return () => window.removeEventListener('resize', changePosition)
     }, [target])
 
-    
-
     return (
         <div className='App'>
-        <Dropdown ref={dropdown} page={page} menus={menus} layout={layout} closeDropdown={closeDropdown} sx={sx} itemStyle={itemStyle} duration={200}/>
+        <Dropdown ref={dropdown} page={page} menus={menus} layout={layout} closeDropdown={closeDropdown} sx={sx} itemStyle={itemStyle} duration={300} resize={resize}/>
          <nav>
             <ul>
                 {Object.keys(dropdownMenu).map((menu, id) => <li key={id} onClick={openDropdown}>{menu}</li>)}

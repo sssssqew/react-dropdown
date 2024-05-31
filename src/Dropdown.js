@@ -1,7 +1,7 @@
 import React, { useState, useEffect, forwardRef } from 'react'
 import './Dropdown.css'
 
-const Dropdown = forwardRef(({ page, menus, layout, closeDropdown, sx, itemStyle, duration }, ref) => {
+const Dropdown = forwardRef(({ page, menus, layout, closeDropdown, sx, itemStyle, duration, resize }, ref) => {
     const [fade, setFade] = useState("") // 액티브 클래스 
     const [id, setId] = useState(null) // 현재 호버된 메뉴
     const [pos, setPos] = useState({x: 0, y: 0}) // 드롭다운 위치
@@ -27,6 +27,12 @@ const Dropdown = forwardRef(({ page, menus, layout, closeDropdown, sx, itemStyle
             setFade("")
         }
     }, [page])
+
+    
+
+    useEffect(() => {
+        setPos({...layout}) // 브라우저 크기 조정시 드롭다운 위치변경
+    }, [resize])
 
     return (
         <div ref={ref} className={`dropdown-container ${fade}`} style={{...sx, left: `${pos.x}px`, top: `${pos.y}px`}}>
